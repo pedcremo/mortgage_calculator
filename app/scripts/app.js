@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name provaApp
+ * @name MortgageApp
  * @description
- * # provaApp
+ * # MortgageApp
  *
  * Main module of the application.
  */
 angular
-  .module('provaApp', [
+  .module('MortgageApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -49,17 +49,17 @@ angular
         controller: 'HipotecacontrollerCtrl',
         controllerAs: 'HipotecaController',
         resolve: {
-                hipoteca_json_server: ['hipotecaResource',  function(hipotecaResource) {
+                hipotecaJsonServer: function() {
                         return undefined;
-                    }]
+                    }
         }
        })
        .when('/hipoteca/edit/:idHipoteca', {
-          templateUrl: "views/hipotecacontroller.html",
+          templateUrl: 'views/hipotecacontroller.html',
           controller: 'HipotecacontrollerCtrl',
           controllerAs: 'HipotecaController',
           resolve: {
-              hipoteca_json_server: ['hipotecaResource', '$route', function(hipotecaResource, $route) {
+              hipotecaJsonServer: ['hipotecaResource', '$route', function(hipotecaResource, $route) {
                       return hipotecaResource.edit($route.current.params.idHipoteca);
                   }]
           }

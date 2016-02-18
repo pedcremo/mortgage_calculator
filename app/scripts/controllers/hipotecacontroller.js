@@ -2,109 +2,110 @@
 
 /**
  * @ngdoc function
- * @name provaApp.controller:HipotecacontrollerCtrl
+ * @name MortgageApp.controller:HipotecacontrollerCtrl
  * @description
  * # HipotecacontrollerCtrl
- * Controller of the provaApp
+ * Controller of the MortgageApp
  */
-angular.module('provaApp')
-  .controller('HipotecacontrollerCtrl', ['$scope','hipoteca_json_server','hipotecaResource','localStorageService','$window'
-, function($scope, hipoteca_json_server, hipotecaResource,localStorageService,$window) {
+angular.module('MortgageApp')
+  .controller('HipotecacontrollerCtrl', ['$scope','hipotecaJsonServer','hipotecaResource','localStorageService','$window', function($scope, hipotecaJsonServer, hipotecaResource,localStorageService,$window) {
 
-    if ( !hipoteca_json_server ){
+    if ( !hipotecaJsonServer ){
         $scope.hipoteca={
-          nif:"",
-          nombre:"",
-          ape1:"",
-          ape2:"",
+          nif:'',
+          nombre:'',
+          ape1:'',
+          ape2:'',
           edad:undefined,
-          telefono:"",
-          email:"",
+          telefono:'',
+          email:'',
 
-          dades_economiques:{
-              ingresos_mensuales:undefined,
+          dadesEconomiques:{
+              ingresosMensuals:undefined,
               capital:undefined,
-              tipo_interes:"variable",
+              tipusInteres:'variable',
               euribor:undefined,
               diferencial:undefined,
-              interes_fijo:undefined,
-              plazo_anyos:undefined,
-              producto_segurocasa:false,
-              producto_nomina:false,
-              producto_segurovida:false
+              interesFixe:undefined,
+              terminiAnys:undefined,
+              producteSegurCasa:false,
+              producteNomina:false,
+              producteSegurVida:false
           },
 
-          cuota_mensual:undefined,
-          interes_aplicado:undefined,
-          total_interesos:undefined
-        }
+          quotaMensual:undefined,
+          interesAplicat:undefined,
+          totalInteresos:undefined
+        };
   }else{
-    $scope.hipoteca=hipoteca_json_server;
+    $scope.hipoteca=hipotecaJsonServer;
   }
 
   $scope.calcularHipoteca=function(){
-   var interes_aplicado_=parseFloat($scope.hipoteca.dades_economiques.euribor)+parseFloat($scope.hipoteca.dades_economiques.diferencial);
+   var interesAplicat_=parseFloat($scope.hipoteca.dadesEconomiques.euribor)+parseFloat($scope.hipoteca.dadesEconomiques.diferencial);
 
-   if ($scope.hipoteca.dades_economiques.tipo_interes==="fixed"){
-       interes_aplicado_=parseFloat($scope.hipoteca.dades_economiques.interes_fijo);
+   if ($scope.hipoteca.dadesEconomiques.tipusInteres==='fixed'){
+       interesAplicat_=parseFloat($scope.hipoteca.dadesEconomiques.interesFixe);
    }
-   if ($scope.hipoteca.dades_economiques.producto_segurocasa) interes_aplicado_-=0.05;
-   if ($scope.hipoteca.dades_economiques.producto_nomina) interes_aplicado_-=0.05;
-   if ($scope.hipoteca.dades_economiques.producto_segurovida) interes_aplicado_-=0.05;
+   if ($scope.hipoteca.dadesEconomiques.producteNomina) {interesAplicat_-=0.05;}
+   if ($scope.hipoteca.dadesEconomiques.producteSegurCasa){interesAplicat_-=0.05;}
+   if ($scope.hipoteca.dadesEconomiques.producteSegurVida) {interesAplicat_-=0.05;}
 
-   $scope.hipoteca.interes_aplicado=interes_aplicado_.toLocaleString()+' %';
+   $scope.hipoteca.interesAplicat=interesAplicat_.toLocaleString()+' %';
 
-   var quota=(($scope.hipoteca.dades_economiques.capital*interes_aplicado_)/12) / (100*(1-Math.pow(1+((interes_aplicado_/12)/100),(-1)*$scope.hipoteca.dades_economiques.plazo_anyos*12)));
-   $scope.hipoteca.cuota_mensual=quota.toLocaleString()+' €';
-   $scope.hipoteca.total_interesos=((quota*12*$scope.hipoteca.dades_economiques.plazo_anyos)-$scope.hipoteca.dades_economiques.capital).toLocaleString()+' €';
-  },
+   var quota=(($scope.hipoteca.dadesEconomiques.capital*interesAplicat_)/12) / (100*(1-Math.pow(1+((interesAplicat_/12)/100),(-1)*$scope.hipoteca.dadesEconomiques.terminiAnys*12)));
+   $scope.hipoteca.quotaMensual=quota.toLocaleString()+' €';
+   $scope.hipoteca.totalInteresos=((quota*12*$scope.hipoteca.dadesEconomiques.terminiAnys)-$scope.hipoteca.dadesEconomiques.capital).toLocaleString()+' €';
+  };
+
   $scope.resetValues=function(){
-      $scope.hipoteca.dades_economiques.interes_fijo=undefined;
-      $scope.hipoteca.dades_economiques.euribor=undefined;
-      $scope.hipoteca.dades_economiques.diferencial=undefined;
-  }
+      $scope.hipoteca.dadesEconomiques.interesFixe=undefined;
+      $scope.hipoteca.dadesEconomiques.euribor=undefined;
+      $scope.hipoteca.dadesEconomiques.diferencial=undefined;
+  };
 
   $scope.saveMortgage=function(){
         localStorageService.set('hipotecas', $scope.hipotecas);
-  }
+  };
 
   $scope.canvi=function(){
        $scope.hipoteca.nif=Math.random();
-  }
+  };
 
-  $scope.json_hipoteca=function(){
+  $scope.submitAndSaveHipoteca=function(){
 
-     if(! $scope.mortgage_form.$valid){
-         angular.forEach($scope.mortgage_form.$error.required, function(field) {
+     if(! $scope.mortgageForm.$valid){
+         angular.forEach($scope.mortgageForm.$error.required, function(field) {
            field.$setDirty();
          });
          return false;
      }else{
        $scope.json = angular.toJson($scope.hipoteca);
-       alert($scope.json);
        $scope.hipotecas = localStorageService.get('hipotecas') || [];
-       if ($scope.hipoteca.idHipoteca==null || $scope.hipoteca.idHipoteca==undefined){ //Si es hipoteca nova
+
+       if ($scope.hipoteca.idHipoteca===null || $scope.hipoteca.idHipoteca===undefined){ //Si es hipoteca nova
          $scope.hipoteca.idHipoteca=$scope.hipotecas.length;
          $scope.hipotecas.push($scope.hipoteca);
        }else{ //Si estem editant una vella
          $scope.hipotecas[$scope.hipoteca.idHipoteca]=$scope.hipoteca;
        }
        $scope.saveMortgage();
-       $window.location.href ="/";
+       $window.location.href ='/';
 
        return true;
      }
-  }
+  };
 
   $scope.$watchCollection(
-                    "hipoteca.dades_economiques",
-                    function( newValue, oldValue ) {
-                        if ($scope.hipoteca.dades_economiques.capital >0 && $scope.hipoteca.dades_economiques.plazo_anyos>0 &&  (($scope.hipoteca.dades_economiques.euribor>0 && $scope.hipoteca.dades_economiques.diferencial>0) || $scope.hipoteca.dades_economiques.interes_fijo>0) ){
+                    'hipoteca.dadesEconomiques',
+                    //function( newValue, oldValue ) {
+                    function(){
+                        if ($scope.hipoteca.dadesEconomiques.capital >0 && $scope.hipoteca.dadesEconomiques.terminiAnys>0 &&  (($scope.hipoteca.dadesEconomiques.euribor>0 && $scope.hipoteca.dadesEconomiques.diferencial>0) || $scope.hipoteca.dadesEconomiques.interesFixe>0) ){
                           $scope.calcularHipoteca();
                         }else{
-                          $scope.hipoteca.cuota_mensual=undefined;
-                          $scope.hipoteca.interes_aplicado=undefined;
-                          $scope.hipoteca.total_interesos=undefined;
+                          $scope.hipoteca.quotaMensual=undefined;
+                          $scope.hipoteca.interesAplicat=undefined;
+                          $scope.hipoteca.totalInteresos=undefined;
                         }
 
                     }

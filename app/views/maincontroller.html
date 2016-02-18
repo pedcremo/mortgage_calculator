@@ -16,7 +16,7 @@
         <td><a href="#/hipoteca/edit/{{hipo.idHipoteca}}">{{$index+1}}</a></td>
         <td>{{hipo.nif}}</td>
         <td>{{hipo.nombre}} {{hipo.ape1}} {{hipo.ape2}}</td>
-        <td>{{hipo.dades_economiques.capital|currency:'€'}}</td>
+        <td>{{hipo.dadesEconomiques.capital|currency:'€'}}</td>
         <td ng-switch on="hipo.datosFinancieros.tipoInteres">
           <span ng-switch-when="F">FIXE</span>
           <span ng-switch-when="V">VARIABLE</span>

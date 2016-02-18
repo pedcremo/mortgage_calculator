@@ -3,7 +3,7 @@
 describe('Controller: MaincontrollerCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('provaApp'));
+  beforeEach(module('MortgageApp'));
 
   var MaincontrollerCtrl,
     scope;
@@ -17,7 +17,7 @@ describe('Controller: MaincontrollerCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
+  /*it('should attach a list of awesomeThings to the scope', function () {
     expect(MaincontrollerCtrl.awesomeThings.length).toBe(3);
-  });
+  });*/
 });

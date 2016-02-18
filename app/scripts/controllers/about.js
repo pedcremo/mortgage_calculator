@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name provaApp.controller:AboutCtrl
+ * @name MortgageApp.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the provaApp
+ * Controller of the MortgageApp
  */
-angular.module('provaApp')
+angular.module('MortgageApp')
   .controller('AboutCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

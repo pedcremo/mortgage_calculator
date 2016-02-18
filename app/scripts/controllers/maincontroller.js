@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name provaApp.controller:MaincontrollerCtrl
+ * @name MortgageApp.controller:MaincontrollerCtrl
  * @description
  * # MaincontrollerCtrl
- * Controller of the provaApp
+ * Controller of the MortgageApp
  */
-angular.module('provaApp')
+angular.module('MortgageApp')
   .controller('MaincontrollerCtrl',function($scope,localStorageService) {
 
     var mortgagesInStore = localStorageService.get('hipotecas');

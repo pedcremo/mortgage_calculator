@@ -96,7 +96,7 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          port: 9001,
+          port: 9021,
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
@@ -224,7 +224,7 @@ module.exports = function (grunt) {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
       }
-    }, 
+    },
 
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
@@ -371,8 +371,8 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'provaApp',
-          htmlmin: '<%= htmlmin.dist.options %>',
+          module: 'MortgageApp',
+          //htmlmin: '<%= htmlmin.dist.options %>', //PERE commented
           usemin: 'scripts/scripts.js'
         },
         cwd: '<%= yeoman.app %>',

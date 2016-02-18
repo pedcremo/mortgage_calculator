@@ -3,7 +3,7 @@
 describe('Controller: MainCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('provaApp'));
+  beforeEach(module('MortgageApp'));
 
   var MainCtrl,
     scope;
@@ -18,15 +18,15 @@ describe('Controller: MainCtrl', function () {
   }));
 
   it('should attach a todo item to our LocalStoraged todo list ', function () {
-    var current_items_number=0;
+    var currentItemsNumber=0;
     if (scope.todos.length){
-      current_items_number=scope.todos.length;
+      currentItemsNumber=scope.todos.length;
     }
     scope.todo = 'Test 1';
     scope.addTodo();
     scope.todo = 'Test 1';
     scope.addTodo();
-    expect(scope.todos.length).toBe(current_items_number+2);
+    expect(scope.todos.length).toBe(currentItemsNumber+2);
   });
 
 });

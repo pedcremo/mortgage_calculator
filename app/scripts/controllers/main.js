@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name provaApp.controller:MainCtrl
+ * @name MortgageApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the provaApp
+ * Controller of the MortgageApp
  */
-angular.module('provaApp')
+angular.module('MortgageApp')
   .controller('MainCtrl', function ($scope,localStorageService) {
     var todosInStore = localStorageService.get('todos');
 
