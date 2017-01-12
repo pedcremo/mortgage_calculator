@@ -19,6 +19,9 @@ angular
     'ui.sortable',
     'LocalStorageModule'
   ])
+  .config(['$locationProvider', function($locationProvider) {
+      $locationProvider.hashPrefix('');
+  }])
   .config(['localStorageServiceProvider', function(localStorageServiceProvider){
     localStorageServiceProvider.setPrefix('mortgage');
   }])

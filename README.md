@@ -2,10 +2,10 @@
 You should install nodejs and npm tool and then, first of all, "bower install" and "npm install" respectively.
 
 This project has been generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1. NICE TOOL. Read a little bit about how to use it. 
+version 0.15.1. NICE TOOL. Read a little bit about how to use it.
 
 ## Build & development
-
+If not installed grunt `npm install -g grunt-cli`
 Run `grunt` for building and `grunt serve` for preview.
 
 ## Testing
